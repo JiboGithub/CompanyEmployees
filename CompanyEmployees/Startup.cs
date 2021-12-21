@@ -27,6 +27,7 @@ namespace CompanyEmployees
             services.ConfigureLoggerService();
             services.AddCors(options => { options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); });
             services.ConfigureSqlContext(Configuration);
+            services.ConfigureRepositoryManager();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
