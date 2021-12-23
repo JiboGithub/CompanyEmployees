@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CompanyEmployees.DataAccess\CompanyEmployees.DataAccess.csproj" />
-    <ProjectReference Include="..\LoggerService\CompanyEmployees.LoggerService.csproj" />
+    <ProjectReference Include="..\CompanyEmployees.LoggerService\CompanyEmployees.LoggerService.csproj" />
   </ItemGroup>
 
 </Project>

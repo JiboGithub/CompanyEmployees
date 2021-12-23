@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31727.386
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyEmployees", "CompanyEmployees\CompanyEmployees.csproj", "{2EB4C5D7-0722-4EF8-B68C-FC6CC969C0C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyEmployees", "CompanyEmployees\CompanyEmployees.csproj", "{2EB4C5D7-0722-4EF8-B68C-FC6CC969C0C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyEmployees.Domain", "CompanyEmployees.Domain\CompanyEmployees.Domain.csproj", "{F0426007-45C2-4124-9A45-9E8053954AEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyEmployees.Domain", "CompanyEmployees.Domain\CompanyEmployees.Domain.csproj", "{F0426007-45C2-4124-9A45-9E8053954AEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyEmployees.Service", "CompanyEmployees.Service\CompanyEmployees.Service.csproj", "{136ADFC9-769D-4041-BB0A-7516D9FE2C12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyEmployees.Service", "CompanyEmployees.Service\CompanyEmployees.Service.csproj", "{136ADFC9-769D-4041-BB0A-7516D9FE2C12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyEmployees.DataAccess", "CompanyEmployees.DataAccess\CompanyEmployees.DataAccess.csproj", "{4438A2FA-DEFB-454A-ADAC-0A7FB173B8B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyEmployees.DataAccess", "CompanyEmployees.DataAccess\CompanyEmployees.DataAccess.csproj", "{4438A2FA-DEFB-454A-ADAC-0A7FB173B8B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyEmployees.LoggerService", "LoggerService\CompanyEmployees.LoggerService.csproj", "{F6FBE0DA-9B32-400A-8B78-08701B0F91F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyEmployees.LoggerService", "CompanyEmployees.LoggerService\CompanyEmployees.LoggerService.csproj", "{B77DFF61-57A9-46E1-A077-E4BA1F0D979F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{4438A2FA-DEFB-454A-ADAC-0A7FB173B8B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4438A2FA-DEFB-454A-ADAC-0A7FB173B8B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4438A2FA-DEFB-454A-ADAC-0A7FB173B8B6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F6FBE0DA-9B32-400A-8B78-08701B0F91F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F6FBE0DA-9B32-400A-8B78-08701B0F91F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F6FBE0DA-9B32-400A-8B78-08701B0F91F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F6FBE0DA-9B32-400A-8B78-08701B0F91F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B77DFF61-57A9-46E1-A077-E4BA1F0D979F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B77DFF61-57A9-46E1-A077-E4BA1F0D979F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B77DFF61-57A9-46E1-A077-E4BA1F0D979F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B77DFF61-57A9-46E1-A077-E4BA1F0D979F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
