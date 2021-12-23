@@ -20,7 +20,7 @@ namespace CompanyEmployees.Service.Extensions
                 opts => opts.UseSqlServer(configuration.GetConnectionString("sqlConnection"),
                     b => b.MigrationsAssembly("CompanyEmployees.DataAccess")));
 
-        public static void ConfigureRepositoryManager(this IServiceCollection services) 
+        public static void ConfigureRepositoryManager(this IServiceCollection services)
             => services.AddScoped<IRepositoryManager, RepositoryManager>();
     }
 }
