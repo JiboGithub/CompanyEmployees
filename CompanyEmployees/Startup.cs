@@ -1,10 +1,11 @@
-using CompanyEmployees.Service.Extensions;
+using AutoMapper;
+using CompanyEmployees.Domain.Mappings;
+using CompanyEmployees.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using NLog;
 using System.IO;
@@ -24,8 +25,13 @@ namespace CompanyEmployees
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureMapping();
+
+            //services.AddAutoMapper(typeof(Startup));
+            //services.AddTransient<MappingProfile>();
+
             services.ConfigureLoggerService();
-            services.AddCors(options => { options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); });
+            services.ConfigureCors();
             services.ConfigureSqlContext(Configuration);
             services.ConfigureRepositoryManager();
             services.AddControllers();
@@ -38,18 +44,7 @@ namespace CompanyEmployees
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CompanyEmployees v1"));
-            }
-
-            else
-            {
-                app.UseHsts();
-            }
-
+            app.UseExceptionHandler();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCors("CorsPolicy");

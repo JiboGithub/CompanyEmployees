@@ -13,4 +13,8 @@
     <ProjectReference Include="..\CompanyEmployees.LoggerService\CompanyEmployees.LoggerService.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
 </Project>
