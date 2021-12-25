@@ -1,10 +1,13 @@
 ﻿using CompanyEmployees.Domain.Models;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CompanyEmployees.Service.Interfaces
 {
     public interface ICompanyRepository
     {
-        IEnumerable<Company> GetAllCompanies(bool trackChanges);
+        Task<IEnumerable<Company>> GetAllCompanies(bool trackChanges);
+        Task<Company> GetCompany(Guid companyId, bool trackChanges);
     }
 }

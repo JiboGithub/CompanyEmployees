@@ -1,11 +1,12 @@
-using AutoMapper;
-using CompanyEmployees.Domain.Mappings;
 using CompanyEmployees.Extensions;
+using CompanyEmployees.LoggerService.Interfaces;
+using CompanyEmployees.Service.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using NLog;
 using System.IO;
@@ -42,9 +43,21 @@ namespace CompanyEmployees
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerManager logger)
         {
-            app.UseExceptionHandler();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.ConfigureExceptionHandler(logger);
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CompanyEmployees v1"));
+            }
+
+            else
+            {
+                app.UseHsts();
+            }
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCors("CorsPolicy");
