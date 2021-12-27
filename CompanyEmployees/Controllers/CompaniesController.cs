@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CompanyEmployees.Domain.Dtos;
+using CompanyEmployees.Domain.Models;
 using CompanyEmployees.LoggerService.Interfaces;
 using CompanyEmployees.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -16,12 +17,32 @@ namespace CompanyEmployees.Controllers
         private readonly IRepositoryManager _repository;
         private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
+
         public CompaniesController(IRepositoryManager repository, ILoggerManager logger, IMapper mapper)
         {
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCompany([FromBody] CompanyForCreationDto company)
+        {
+            if (company == null)
+            {
+                _logger.LogError("CompanyForCreationDto object sent from client is null.");
+                return BadRequest("CompanyForCreationDto object is null");
+            }
+            var companyEntity = _mapper.Map<Company>(company);
+            await _repository.Company.CreateCompany(companyEntity); 
+            await _repository.SaveAsync(); 
+            var companyToReturn = _mapper.Map<CompanyDto>(companyEntity);
+            return CreatedAtRoute("CompanyById", 
+                new { 
+                    companyId = companyToReturn.Id }, 
+                companyToReturn);
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> GetCompanies()
@@ -43,7 +64,7 @@ namespace CompanyEmployees.Controllers
         }
 
 
-        [HttpGet("{companyId}")]
+        [HttpGet("{companyId}", Name = "CompanyById")]
         public async Task<IActionResult> GetCompany(Guid companyId)
         {
             var company = await _repository.Company.GetCompany(companyId, trackChanges: false); 

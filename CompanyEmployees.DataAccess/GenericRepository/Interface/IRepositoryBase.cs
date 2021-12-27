@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace CompanyEmployees.DataAccess.GenericRepository.Interface
 {
     public interface IRepositoryBase<T>
     {
-        IQueryable<T> FindAll(bool trackChanges);
-        IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges);
-        void Create(T entity); void Update(T entity); void Delete(T entity);
+        Task<IQueryable<T>> FindAllAsync(bool trackChanges);
+        Task<IQueryable<T>> FindByConditionAsync(Expression<Func<T, bool>> expression, bool trackChanges);
+        Task CreateAsync(T entity); 
+        Task UpdateAsync(T entity); 
+        Task RemoveAsync(T entity);
     }
 }

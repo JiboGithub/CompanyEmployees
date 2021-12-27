@@ -15,11 +15,14 @@ namespace CompanyEmployees.Service.Services
         public CompanyRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
         }
+
+        public async Task CreateCompany(Company company) => await CreateAsync(company);
+
         public async Task<IEnumerable<Company>> GetAllCompanies(bool trackChanges)
-            => await FindAll(trackChanges).OrderBy(c => c.Name).ToListAsync();
+            => await FindAllAsync(trackChanges).Result.OrderBy(c => c.Name).ToListAsync();
 
         public async Task<Company> GetCompany(Guid companyId, bool trackChanges) 
-            => await FindByCondition(c => c.Id.Equals(companyId), trackChanges).SingleOrDefaultAsync();
+            => await FindByConditionAsync(c => c.Id.Equals(companyId), trackChanges).Result.SingleOrDefaultAsync();
 
     }
 }

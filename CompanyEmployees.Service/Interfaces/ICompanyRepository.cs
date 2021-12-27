@@ -9,5 +9,6 @@ namespace CompanyEmployees.Service.Interfaces
     {
         Task<IEnumerable<Company>> GetAllCompanies(bool trackChanges);
         Task<Company> GetCompany(Guid companyId, bool trackChanges);
+        Task CreateCompany(Company company);
     }
 }
