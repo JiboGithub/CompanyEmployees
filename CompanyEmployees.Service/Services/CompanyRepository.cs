@@ -18,9 +18,17 @@ namespace CompanyEmployees.Service.Services
 
         public async Task CreateCompany(Company company) => await CreateAsync(company);
 
+        public async Task DeleteCompany(Company company)
+        {
+            await RemoveAsync(company);
+        }
+
         public async Task<IEnumerable<Company>> GetAllCompanies(bool trackChanges)
             => await FindAllAsync(trackChanges).Result.OrderBy(c => c.Name).ToListAsync();
 
+        public async Task<IEnumerable<Company>> GetCompaniesByIds(IEnumerable<Guid> ids, bool trackChanges) 
+            => await FindByConditionAsync(x => ids.Contains(x.Id), trackChanges).Result.ToListAsync();
+       
         public async Task<Company> GetCompany(Guid companyId, bool trackChanges) 
             => await FindByConditionAsync(c => c.Id.Equals(companyId), trackChanges).Result.SingleOrDefaultAsync();
 

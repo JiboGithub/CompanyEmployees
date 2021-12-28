@@ -16,6 +16,8 @@ namespace CompanyEmployees.Domain.Mappings
             CreateMap<Employee, EmployeeDto>();
 
             CreateMap<EmployeeForCreationDto, Employee>();
+
+            CreateMap<EmployeeForUpdateDto, Employee>();
         }
     }
 }

@@ -10,5 +10,6 @@ namespace CompanyEmployees.Service.Interfaces
         Task<IEnumerable<Employee>> GetEmployees(Guid companyId, bool trackChanges);
         Task<Employee> GetEmployee(Guid companyId, Guid employeeId, bool trackChanges);
         Task CreateEmployeeForCompany(Guid companyId, Employee employee);
+        Task DeleteEmployee(Employee employee);
     }
 }

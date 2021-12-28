@@ -22,6 +22,11 @@ namespace CompanyEmployees.Service.Services
             await CreateAsync(employee);
         }
 
+        public async Task DeleteEmployee(Employee employee)
+        {
+            await RemoveAsync(employee);
+        }
+
         public async Task<Employee> GetEmployee(Guid companyId, Guid employeeId, bool trackChanges) 
             => await FindByConditionAsync(e => e.CompanyId.Equals(companyId) && e.Id.Equals(employeeId), trackChanges).Result.SingleOrDefaultAsync();
 
