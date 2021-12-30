@@ -6,6 +6,7 @@ using CompanyEmployees.LoggerService.Services;
 using CompanyEmployees.Service.Interfaces;
 using CompanyEmployees.Service.ResponseFormatters;
 using CompanyEmployees.Service.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,6 +35,7 @@ namespace CompanyEmployees.Extensions
 
         public static void ConfigureMapping(this IServiceCollection services)
         {
+            services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
             var mapperConfig = new MapperConfiguration(map =>
             {
                 map.AddProfile<CompanyMappingProfile>();
@@ -47,7 +49,8 @@ namespace CompanyEmployees.Extensions
             {
                 config.RespectBrowserAcceptHeader = true;
                 config.ReturnHttpNotAcceptable = true;
-            }).AddXmlDataContractSerializerFormatters()
+            }).AddNewtonsoftJson()
+            .AddXmlDataContractSerializerFormatters()
             .AddCustomCSVFormatter();
 
         public static IMvcBuilder AddCustomCSVFormatter(this IMvcBuilder builder) 

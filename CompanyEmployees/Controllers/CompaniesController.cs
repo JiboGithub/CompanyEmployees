@@ -140,5 +140,25 @@ namespace CompanyEmployees.Controllers
             var companiesToReturn = _mapper.Map<IEnumerable<CompanyDto>>(companyEntities); 
             return Ok(companiesToReturn);
         }
+
+
+        [HttpPut("{id}")] 
+        public async Task<IActionResult> UpdateCompany(Guid id, [FromBody] CompanyForUpdateDto company) 
+        {
+            if (company is null) 
+            {
+                _logger.LogError("CompanyForUpdateDto object sent from client is null."); 
+                return BadRequest("CompanyForUpdateDto object is null");
+            }
+            var companyEntity = _repository.Company.GetCompany(id, trackChanges: true); 
+            if (companyEntity == null)
+            {
+                _logger.LogInfo($"Company with id: {id} doesn't exist in the database."); 
+                return NotFound(); 
+            }
+            await _mapper.Map(company, companyEntity); 
+            await _repository.SaveAsync();
+            return NoContent(); 
+        }
     }
 }
