@@ -18,7 +18,7 @@ namespace CompanyEmployees.Service.Extensions
                 return employees; 
             var lowerCaseTerm = searchTerm.Trim().ToLower();
             return employees.Where(e => e.Name.ToLower().Contains(lowerCaseTerm)
-            || e.Position.ToLower().Contains(lowerCaseTerm); 
+            || e.Position.ToLower().Contains(lowerCaseTerm)); 
         }
     }
 }
