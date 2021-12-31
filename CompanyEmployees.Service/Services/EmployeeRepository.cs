@@ -3,6 +3,7 @@ using CompanyEmployees.DataAccess.GenericRepository.Service;
 using CompanyEmployees.Domain.Models;
 using CompanyEmployees.Domain.RequestFeatures;
 using CompanyEmployees.Service.Interfaces;
+using CompanyEmployees.Service.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -33,10 +34,9 @@ namespace CompanyEmployees.Service.Services
 
         public async Task<PagedList<Employee>> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters, bool trackChanges) 
         {
-            var employees = await FindByConditionAsync(e => e.CompanyId.Equals(companyId) 
-            && e.Age >= employeeParameters.MinAge 
-            && e.Age <= employeeParameters.MaxAge, 
-            trackChanges).Result
+            var employees = await FindByConditionAsync(e => e.CompanyId.Equals(companyId), trackChanges).Result
+                .FilterEmployees(employeeParameters.MinAge, employeeParameters.MaxAge)
+                .Search(employeeParameters.SearchTerm)
                 .OrderBy(e => e.Name)
                 .Skip((employeeParameters.PageNumber - 1) * employeeParameters.PageSize)
                 .Take(employeeParameters.PageSize).ToListAsync(); 
