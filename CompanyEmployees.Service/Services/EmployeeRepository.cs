@@ -31,11 +31,17 @@ namespace CompanyEmployees.Service.Services
         public async Task<Employee> GetEmployee(Guid companyId, Guid employeeId, bool trackChanges) 
             => await FindByConditionAsync(e => e.CompanyId.Equals(companyId) && e.Id.Equals(employeeId), trackChanges).Result.SingleOrDefaultAsync();
 
-        public async Task<IEnumerable<Employee>> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters, bool trackChanges) 
-            => await FindByConditionAsync(e => e.CompanyId.Equals(companyId), trackChanges).Result
+        public async Task<PagedList<Employee>> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters, bool trackChanges) 
+        {
+            var employees = await FindByConditionAsync(e => e.CompanyId.Equals(companyId), trackChanges).Result
                 .OrderBy(e => e.Name)
                 .Skip((employeeParameters.PageNumber - 1) * employeeParameters.PageSize)
-                .Take(employeeParameters.PageSize)
-                .ToListAsync();
+                .Take(employeeParameters.PageSize).ToListAsync(); 
+            
+            var count = await FindByConditionAsync(e => e.CompanyId.Equals(companyId), trackChanges).Result
+                .CountAsync(); 
+            
+            return new PagedList<Employee>(employees, employeeParameters.PageNumber, employeeParameters.PageSize, count); 
+        }
     }
 }

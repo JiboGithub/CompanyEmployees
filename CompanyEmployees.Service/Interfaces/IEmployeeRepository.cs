@@ -8,7 +8,7 @@ namespace CompanyEmployees.Service.Interfaces
 {
     public interface IEmployeeRepository
     {
-        Task<IEnumerable<Employee>> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters, bool trackChanges);
+        Task<PagedList<Employee>> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters, bool trackChanges);
         Task<Employee> GetEmployee(Guid companyId, Guid employeeId, bool trackChanges);
         Task CreateEmployeeForCompany(Guid companyId, Employee employee);
         Task DeleteEmployee(Employee employee);
