@@ -33,7 +33,10 @@ namespace CompanyEmployees.Service.Services
 
         public async Task<PagedList<Employee>> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters, bool trackChanges) 
         {
-            var employees = await FindByConditionAsync(e => e.CompanyId.Equals(companyId), trackChanges).Result
+            var employees = await FindByConditionAsync(e => e.CompanyId.Equals(companyId) 
+            && e.Age >= employeeParameters.MinAge 
+            && e.Age <= employeeParameters.MaxAge, 
+            trackChanges).Result
                 .OrderBy(e => e.Name)
                 .Skip((employeeParameters.PageNumber - 1) * employeeParameters.PageSize)
                 .Take(employeeParameters.PageSize).ToListAsync(); 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,5 +20,11 @@ namespace CompanyEmployees.Domain.RequestFeatures
             set { _pageSize = (value > maxPageSize) ? maxPageSize : value; } 
         }
     }
-    public class EmployeeParameters : RequestParameters { }
+    public class EmployeeParameters : RequestParameters 
+    {
+        public uint MinAge { get; set; }
+        public uint MaxAge { get; set; } = int.MaxValue; 
+
+        public bool ValidAgeRange => MaxAge > MinAge;
+    }
 }
