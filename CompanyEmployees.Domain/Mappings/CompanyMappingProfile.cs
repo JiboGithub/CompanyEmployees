@@ -20,7 +20,7 @@ namespace CompanyEmployees.Domain.Mappings
 
             CreateMap<CompanyForCreationDto, Company>();
 
-            CreateMap<CompanyForUpdateDto, Company>();
+            CreateMap<CompanyForUpdateDto, Company>().ReverseMap();
         }
     }
 }

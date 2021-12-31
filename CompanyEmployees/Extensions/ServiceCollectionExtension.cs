@@ -3,6 +3,8 @@ using CompanyEmployees.DataAccess.Data;
 using CompanyEmployees.Domain.Mappings;
 using CompanyEmployees.LoggerService.Interfaces;
 using CompanyEmployees.LoggerService.Services;
+using CompanyEmployees.Service.Filters;
+using CompanyEmployees.Service.Filters.ActionFilters;
 using CompanyEmployees.Service.Interfaces;
 using CompanyEmployees.Service.ResponseFormatters;
 using CompanyEmployees.Service.Services;
@@ -47,6 +49,7 @@ namespace CompanyEmployees.Extensions
         public static void ConfigureControllers(this IServiceCollection services)
             => services.AddControllers(config =>
             {
+                //config.Filters.Add(new ActionFilter());
                 config.RespectBrowserAcceptHeader = true;
                 config.ReturnHttpNotAcceptable = true;
             }).AddNewtonsoftJson()
@@ -57,5 +60,11 @@ namespace CompanyEmployees.Extensions
             => builder.AddMvcOptions(
                 config => config.OutputFormatters.Add(new CsvOutputFormatter()));
 
+        public static void RegisterDependencies(this IServiceCollection services)
+        {
+            services.AddScoped<ValidationFilterAttribute>();
+            services.AddScoped<ValidateCompanyExistsAttribute>();
+            services.AddScoped<ValidateEmployeeForCompanyExistsAttribute>();
+        }
     }
 }

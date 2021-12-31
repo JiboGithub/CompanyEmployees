@@ -34,6 +34,6 @@ namespace CompanyEmployees.Service.Services
                 return _employeeRepository;
             }
         }
-        public async Task SaveAsync() => await _repositoryContext.SaveChangesAsync();
+        public Task SaveAsync() =>  _repositoryContext.SaveChangesAsync();
     }
 }

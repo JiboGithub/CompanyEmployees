@@ -1,6 +1,7 @@
 ﻿using CompanyEmployees.DataAccess.Data;
 using CompanyEmployees.DataAccess.GenericRepository.Service;
 using CompanyEmployees.Domain.Models;
+using CompanyEmployees.Domain.RequestFeatures;
 using CompanyEmployees.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -30,7 +31,11 @@ namespace CompanyEmployees.Service.Services
         public async Task<Employee> GetEmployee(Guid companyId, Guid employeeId, bool trackChanges) 
             => await FindByConditionAsync(e => e.CompanyId.Equals(companyId) && e.Id.Equals(employeeId), trackChanges).Result.SingleOrDefaultAsync();
 
-        public async Task<IEnumerable<Employee>> GetEmployees(Guid companyId, bool trackChanges)
-            => await Task.Run(() => FindByConditionAsync(e => e.CompanyId.Equals(companyId), trackChanges).Result.OrderBy(e => e.Name));
+        public async Task<IEnumerable<Employee>> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters, bool trackChanges) 
+            => await FindByConditionAsync(e => e.CompanyId.Equals(companyId), trackChanges).Result
+                .OrderBy(e => e.Name)
+                .Skip((employeeParameters.PageNumber - 1) * employeeParameters.PageSize)
+                .Take(employeeParameters.PageSize)
+                .ToListAsync();
     }
 }
